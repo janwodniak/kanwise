@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <include file="/changesets/tables/create-tests-tables.xml"/>
+    <include file="/changesets/inserts/insert-test-data.xml"/>
+    <include file="/changesets/inserts/insert-otp-data.sql"/>
+    <include file="/changesets/inserts/insert-password-reset-token-data.sql"/>
+    <include file="/changesets/inserts/insert-notification-subscriptions-data.sql"/>
+    <include file="/changesets/inserts/insert-2FA-subscriptions-data.sql"/>
+    <include file="/changesets/inserts/insert-image-data.sql"/>
+    <include file="/changesets/seq/set-user-seq.xml"/>
+</databaseChangeLog>

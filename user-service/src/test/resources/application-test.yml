@@ -1,0 +1,108 @@
+##########################  SERVER CONFIGURATION  #######################
+server:
+  port: 8080
+
+##########################  SPRING CONFIGURATION  #######################
+spring:
+  main:
+    allow-bean-definition-overriding: true
+    lazy-initialization: true
+  application:
+    name: user-service
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+  zipkin:
+    enabled: false
+
+  #######################  SPRING CLOUD CONFIGURATION  #######################
+  cloud:
+    discovery:
+      enabled: false
+
+  #######################  DATASOURCE CONFIGURATION  #######################
+  datasource:
+    hikari:
+      maximum-pool-size: 2
+    url: 'jdbc:tc:postgresql://test'
+    username: 'kanwise'
+    password: 'kanwise'
+  jpa:
+    hibernate:
+      ddl-auto: 'none'
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+    show-sql: true
+    open-in-view: false
+
+  #######################  LIQUIBASE CONFIGURATION  #######################
+  liquibase:
+    enabled: true
+    changeLog: 'classpath:liquibase-test-changelog.xml'
+
+  #######################  KAFKA CONFIGURATION  #######################
+  kafka:
+    bootstrap-servers: localhost:29092
+    topic-names:
+      NOTIFICATION_EMAIL: notification-email
+      NOTIFICATION_SMS: notification-sms
+
+
+#######################  QUERY UTILS CONFIGURATION  #######################
+spring-hibernate-query-utils:
+  n-plus-one-queries-detection:
+    error-level: 'EXCEPTION'
+
+#######################  EUREKA CONFIGURATION  #######################
+eureka:
+  client:
+    enabled: false
+    fetch-registry: false
+    register-with-eureka: false
+
+kanwise:
+  #######################  JWT CONFIGURATION  #######################
+  jwt:
+    secretKey: "Yq3t6w9z$C&F)J@McQfTjWnZr4u7x!A%D*G-KaPdRgUkXp2s5v8y/B?E(H+MbQeThVmYq3t6w9z$C&F)J@NcRfUjXnZr4u7x!A%D*G-KaPdSgVkYp3s5v8y/B?E(H+Mb"
+    tokenPrefix: "Bearer "
+    expirationAfter: "20d"
+    authorities: "kanwise"
+    issuer: "kanwise.com"
+    audience: "kanwise"
+
+  #######################  BFA CONFIGURATION  #######################
+  brute-force-attack:
+    maximum-number-of-attempts: 5
+    attempt-increment: 1
+    expire-after-write-time-unit: "MINUTES"
+    expire-after-write-unit: 15
+
+  #######################  TOKEN CONFIGURATION  #######################
+  token:
+    expiration: "1h"
+
+  #######################  URL CONFIGURATION  #######################
+  url:
+    public-urls:
+      - '**'
+
+  #######################  OTP CONFIGURATION  #######################
+  otp:
+    expiration: "5m"
+    length: 6
+
+  #######################  SPACES CONFIGURATION  #######################
+  digitalocean:
+    spaces:
+      serviceEndpoint: "nyc3.digitaloceanspaces.com"
+      names:
+        profile-images: "kanwise"
+      secretKey: "MY_SECRET_KEY"
+      signingRegion: "nyc3"
+      accessKey: "MY_ACCESS_KEY"

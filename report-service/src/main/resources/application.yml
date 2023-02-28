@@ -1,0 +1,114 @@
+#######################  SERVER CONFIGURATION  #######################
+server:
+  port: '8085'
+#######################  SPRING CONFIGURATION  #######################
+spring:
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+  main:
+    allow-bean-definition-overriding: 'true'
+  application:
+    name: report-service
+  #######################  ZIPKIN CONFIGURATION  #######################
+  zipkin:
+    base-url: http://localhost:9411
+  #######################  QUARTZ CONFIGURATION  #######################
+  quartz:
+    properties:
+      org:
+        quartz:
+          jobStore:
+            class: org.quartz.impl.jdbcjobstore.JobStoreTX
+            useProperties: 'false'
+            isClustered: 'true'
+            driverDelegateClass: org.quartz.impl.jdbcjobstore.PostgreSQLDelegate
+            tablePrefix: QRTZ_
+            dataSource: myDS
+            clusterCheckinInterval: '1000'
+            misfireThreshold: '60000'
+          scheduler:
+            instanceName: MyClusteredScheduler
+            instanceId: AUTO
+          dataSource:
+            myDS:
+              URL: jdbc:postgresql://localhost:5432/quartz
+              maxConnections: '5'
+              validationQuery: select 0 from dual
+              driver: org.postgresql.Driver
+              user: kanwise
+              password: kanwise
+          threadPool:
+            threadPriority: '5'
+            threadCount: '25'
+            class: org.quartz.simpl.SimpleThreadPool
+    job-store-type: jdbc
+
+  #######################  DATASOURCE CONFIGURATION  #######################
+  liquibase:
+    change-log: /changelog-quartz.xml
+    password: kanwise
+    user: kanwise
+    url: jdbc:postgresql://localhost:5432/quartz
+  jpa:
+    hibernate:
+      ddl-auto: 'create-drop'
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+    show-sql: true
+  datasource:
+    password: kanwise
+    url: jdbc:postgresql://localhost:5432/report
+    username: kanwise
+  #######################  KAFKA CONFIGURATION  #######################
+  kafka:
+    bootstrap-servers: localhost:29092
+    topic-names:
+      NOTIFICATION_EMAIL: notification-email
+
+
+#######################  PDF CONFIGURATION  #######################
+pdf.generated:
+  paths:
+    PERSONAL: "report-service/src/main/resources/generated/personal/"
+    PROJECT: "report-service/src/main/resources/generated/project/"
+
+pdf.template:
+  names:
+    PERSONAL: "personal-report.html"
+    PROJECT: "project-report.html"
+
+#######################  KANWISE CONFIGURATION  #######################
+kanwise:
+  #######################  URL CONFIGURATION  #######################
+  url:
+    public-urls:
+      - '**'
+  #######################  SPACES CONFIGURATION  #######################
+  digitalocean:
+    spaces:
+      serviceEndpoint: # TODO: Add digitalocean service endpoint
+      names:
+        reports: kanwise
+      secretKey: # TODO: Add digitalocean secret key
+      signingRegion: # TODO: Add digitalocean signing region
+      accessKey: # TODO: Add digitalocean access key
+  #######################  AUTHENTICATION CONFIGURATION  #######################
+  filter:
+    ommited:
+      authentication:
+        - path: "/subscriber"
+          method: "POST"
+  #######################  DIRECTORY CONFIGURATION  #######################
+  directory:
+    report-templates: "report-service/src/main/resources/templates-report-pdf"
+
+#######################  EUREKA CONFIGURATION  #######################
+eureka:
+  client:
+    fetch-registry: 'true'
+    service-url:
+      deaultZone: http://localhost:8761/eureka
+    register-with-eureka: 'true'

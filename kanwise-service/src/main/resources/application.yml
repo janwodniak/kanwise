@@ -1,0 +1,58 @@
+##########################  SERVER CONFIGURATION  #######################
+server:
+  port: 8087
+##########################  SPRING CONFIGURATION  #######################
+spring:
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+  main:
+    allow-bean-definition-overriding: true
+  application:
+    name: kanwise-service
+  jackson:
+    serialization:
+      write_dates_as_timestamps: false
+  ##########################  CLOUD CONFIGURATION  #######################
+  cloud:
+    discovery:
+      enabled: 'true'
+  ##########################  DB CONFIGURATION  #######################
+  datasource:
+    url: jdbc:postgresql://localhost:5432/project
+    username: kanwise
+    password: kanwise
+  jpa:
+    hibernate:
+      ddl-auto: 'create-drop'
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+    show-sql: true
+  liquibase:
+    enabled: false
+  ##########################  ZIPKIN CONFIGURATION  #######################
+  zipkin:
+    base-url: http://localhost:9411
+
+##########################  EUREKA CONFIGURATION  #######################
+eureka:
+  client:
+    fetch-registry: 'true'
+    register-with-eureka: 'true'
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+
+##########################  KANWISE CONFIGURATION  #######################
+kanwise:
+  url:
+    public-urls:
+      - '**'
+  filter:
+    ommited:
+      authentication:
+        - path: "/report/data/personal"
+          method: "POST"
+        - path: "/member"
+          method: "POST"

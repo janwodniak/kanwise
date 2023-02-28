@@ -1,0 +1,94 @@
+##########################  SPRING CONFIGURATION  #######################
+spring:
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+  autoconfigure:
+    exclude:
+      - org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+      - org.springframework.boot.autoconfigure.kafka.KafkaAutoConfiguration
+      - org.springframework.boot.autoconfigure.quartz.QuartzAutoConfiguration
+      - org.springframework.boot.autoconfigure.liquibase.LiquibaseAutoConfiguration
+  main:
+    allow-bean-definition-overriding: 'true'
+  application:
+    name: report-service
+  #######################  ZIPKIN CONFIGURATION  #######################
+  zipkin:
+    enabled: false
+  #######################  DATASOURCE CONFIGURATION  ######################
+  liquibase:
+    change-log: /changelog-test.xml
+    password: kanwise
+    user: kanwise
+    url: 'jdbc:tc:postgresql://test'
+  datasource:
+    hikari:
+      maximum-pool-size: 2
+    url: 'jdbc:tc:postgresql://test'
+    username: kanwise
+    password: kanwise
+  jpa:
+    hibernate:
+      ddl-auto: 'none'
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+    show-sql: true
+    open-in-view: false
+  #######################  SPRING CLOUD CONFIGURATION  #######################
+  cloud:
+    discovery:
+      enabled: false
+  #######################  KAFKA CONFIGURATION  #######################
+  kafka:
+    bootstrap-servers: localhost:29092
+    topic-names:
+      NOTIFICATION_EMAIL: notification-email
+
+#######################  SERVER CONFIGURATION  #######################
+server:
+  port: '8085'
+
+#######################  EUREKA CONFIGURATION  #######################
+eureka:
+  client:
+    enabled: false
+
+#######################  PDF CONFIGURATION  #######################
+pdf:
+  generated:
+    paths:
+      PERSONAL: "src/test/resources/generated/personal/"
+      PROJECT: "src/test/resources/generated/project/"
+  template:
+    names:
+      PERSONAL: "personal-report.html"
+      PROJECT: "project-report.html"
+
+#######################  KANWISE CONFIGURATION  #######################
+kanwise:
+  #######################  SPACES CONFIGURATION  #######################
+  digitalocean:
+    spaces:
+      serviceEndpoint: "nyc3.digitaloceanspaces.com"
+      names:
+        reports: "kanwise"
+      secretKey: "MY_SECRET_KEY"
+      signingRegion: "nyc3"
+      accessKey: "MY_ACCESS_KEY"
+  #######################  AUTHENTICATION CONFIGURATION  #######################
+  filter:
+    ommited:
+      authentication:
+        - path: "/subscriber"
+          method: "POST"
+    #######################  DIRECTORY CONFIGURATION  #######################
+  directory:
+    report-templates: "src/test/resources/templates-report-pdf"
+
+#######################  TEST CONFIGURATION  #######################
+spring-hibernate-query-utils:
+  n-plus-one-queries-detection:
+    error-level: 'EXCEPTION'

@@ -1,0 +1,184 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd">
+    <changeSet author="janwodniak (generated)" id="1672315990327-1">
+        <createTable tableName="subscriber">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="subscriber_pkey"/>
+            </column>
+            <column name="active" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="email" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="username" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="janwodniak (generated)" id="1672315990327-2">
+        <createTable tableName="personal_report_job_log">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="personal_report_job_log_pkey"/>
+            </column>
+            <column name="level" type="VARCHAR(255)"/>
+            <column name="message" type="VARCHAR(255)"/>
+            <column name="timestamp" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="status" type="INTEGER"/>
+            <column name="job_information_id" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="janwodniak (generated)" id="1672315990327-3">
+        <createTable tableName="project_report_job_log">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="project_report_job_log_pkey"/>
+            </column>
+            <column name="level" type="VARCHAR(255)"/>
+            <column name="message" type="VARCHAR(255)"/>
+            <column name="timestamp" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="status" type="INTEGER"/>
+            <column name="job_information_id" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="janwodniak (generated)" id="1672315990327-4">
+        <addUniqueConstraint columnNames="username" constraintName="uk_5k7gsimsgkm5kx66813ettmyj"
+                             tableName="subscriber"/>
+    </changeSet>
+    <changeSet author="janwodniak (generated)" id="1672315990327-5">
+        <createTable tableName="personal_report_job_information">
+            <column name="id" type="VARCHAR(255)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="personal_report_job_information_pkey"/>
+            </column>
+            <column name="created_at" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="cron" type="VARCHAR(255)"/>
+            <column name="initial_offset_ms" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="job_type" type="VARCHAR(255)"/>
+            <column name="remaining_fire_count" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="repeat_interval" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="run_forever" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="status" type="INTEGER"/>
+            <column name="total_fire_count" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="email" type="VARCHAR(255)"/>
+            <column name="end_date" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="start_date" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="username" type="VARCHAR(255)"/>
+            <column name="subscriber_id" type="BIGINT"/>
+            <column name="active" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="janwodniak (generated)" id="1672315990327-6">
+        <createTable tableName="personal_report_job_log_data">
+            <column name="personal_report_job_log_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="personal_report_job_log_data_pkey"/>
+            </column>
+            <column name="data" type="VARCHAR(255)"/>
+            <column name="data_key" type="VARCHAR(255)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="personal_report_job_log_data_pkey"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="janwodniak (generated)" id="1672315990327-7">
+        <createTable tableName="project_report_job_information">
+            <column name="id" type="VARCHAR(255)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="project_report_job_information_pkey"/>
+            </column>
+            <column name="created_at" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="cron" type="VARCHAR(255)"/>
+            <column name="initial_offset_ms" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="job_type" type="VARCHAR(255)"/>
+            <column name="remaining_fire_count" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="repeat_interval" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="run_forever" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="status" type="INTEGER"/>
+            <column name="total_fire_count" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="email" type="VARCHAR(255)"/>
+            <column name="end_date" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="project_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="start_date" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="username" type="VARCHAR(255)"/>
+            <column name="subscriber_id" type="BIGINT"/>
+            <column name="active" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="janwodniak (generated)" id="1672315990327-8">
+        <createTable tableName="project_report_job_log_data">
+            <column name="project_report_job_log_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="project_report_job_log_data_pkey"/>
+            </column>
+            <column name="data" type="VARCHAR(255)"/>
+            <column name="data_key" type="VARCHAR(255)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="project_report_job_log_data_pkey"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="janwodniak (generated)" id="1672315990327-9">
+        <addForeignKeyConstraint baseColumnNames="project_report_job_log_id" baseTableName="project_report_job_log_data"
+                                 constraintName="fkb1durasda11416gl9n2l1cn6b" deferrable="false"
+                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+                                 referencedColumnNames="id" referencedTableName="project_report_job_log"
+                                 validate="true"/>
+    </changeSet>
+    <changeSet author="janwodniak (generated)" id="1672315990327-10">
+        <addForeignKeyConstraint baseColumnNames="job_information_id" baseTableName="personal_report_job_log"
+                                 constraintName="fkb3ey3b3b5e4uoi3iv3qbdvdm" deferrable="false"
+                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+                                 referencedColumnNames="id" referencedTableName="personal_report_job_information"
+                                 validate="true"/>
+    </changeSet>
+    <changeSet author="janwodniak (generated)" id="1672315990327-11">
+        <addForeignKeyConstraint baseColumnNames="subscriber_id" baseTableName="personal_report_job_information"
+                                 constraintName="fkkjmn96f07shlditsh1qxy4xol" deferrable="false"
+                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+                                 referencedColumnNames="id" referencedTableName="subscriber" validate="true"/>
+    </changeSet>
+    <changeSet author="janwodniak (generated)" id="1672315990327-12">
+        <addForeignKeyConstraint baseColumnNames="job_information_id" baseTableName="project_report_job_log"
+                                 constraintName="fkkp2u7ej00s3odyl4bsssw5v67" deferrable="false"
+                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+                                 referencedColumnNames="id" referencedTableName="project_report_job_information"
+                                 validate="true"/>
+    </changeSet>
+    <changeSet author="janwodniak (generated)" id="1672315990327-13">
+        <addForeignKeyConstraint baseColumnNames="personal_report_job_log_id"
+                                 baseTableName="personal_report_job_log_data"
+                                 constraintName="fkqaaws2hrs65vie5gqynu0hb3i" deferrable="false"
+                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+                                 referencedColumnNames="id" referencedTableName="personal_report_job_log"
+                                 validate="true"/>
+    </changeSet>
+    <changeSet author="janwodniak (generated)" id="1672315990327-14">
+        <addForeignKeyConstraint baseColumnNames="subscriber_id" baseTableName="project_report_job_information"
+                                 constraintName="fkyrb02jh8adoqsj1e0dapivdh" deferrable="false"
+                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+                                 referencedColumnNames="id" referencedTableName="subscriber" validate="true"/>
+    </changeSet>
+</databaseChangeLog>
+

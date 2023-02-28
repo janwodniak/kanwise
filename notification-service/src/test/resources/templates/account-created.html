@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title></title>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+    <meta content="width=device-width, initial-scale=1" name="viewport"/>
+    <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+    <style>
+        @media screen {
+            @font-face {
+                font-family: "Lato";
+                font-style: normal;
+                font-weight: 400;
+                src: local("Lato Regular"), local("Lato-Regular"), url(https://fonts.gstatic.com/s/lato/v11/qIIYRU-oROkIk8vfvxw6QvesZW2xOQ-xsNqO47m55DA.woff) format("woff");
+            }
+            @font-face {
+                font-family: "Lato";
+                font-style: normal;
+                font-weight: 700;
+                src: local("Lato Bold"), local("Lato-Bold"), url(https://fonts.gstatic.com/s/lato/v11/qdgUG4U09HnJwhYI-uK18wLUuEpTyoUstqEm5AMlJo4.woff) format("woff");
+            }
+            @font-face {
+                font-family: "Lato";
+                font-style: italic;
+                font-weight: 400;
+                src: local("Lato Italic"), local("Lato-Italic"), url(https://fonts.gstatic.com/s/lato/v11/RYyZNoeFgb0l7W3Vu1aSWOvvDin1pK8aKteLpeZ5c0A.woff) format("woff");
+            }
+            @font-face {
+                font-family: "Lato";
+                font-style: italic;
+                font-weight: 700;
+                src: local("Lato Bold Italic"), local("Lato-BoldItalic"), url(https://fonts.gstatic.com/s/lato/v11/HkF_qI1x_noxlxhrhMQYELO3LdcAZYWl9Si6vvxL-qU.woff) format("woff");
+            }
+            @media (prefers-color-scheme: dark) {
+                .violet-dark-bg {
+                    background-color: #9459ff !important;
+                }
+
+                .violet-dark-font {
+                    color: #9459ff !important;
+                }
+            }
+        }
+
+        body,
+        table,
+        td,
+        a {
+            -webkit-text-size-adjust: 100%;
+            -ms-text-size-adjust: 100%;
+        }
+
+        table,
+        td {
+            mso-table-lspace: 0;
+            mso-table-rspace: 0;
+        }
+
+        img {
+            -ms-interpolation-mode: bicubic;
+        }
+
+        table {
+            border-collapse: collapse !important;
+        }
+
+        body {
+            height: 100% !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            width: 100% !important;
+        }
+
+        a[x-apple-data-detectors] {
+            color: inherit !important;
+            text-decoration: none !important;
+            font-size: inherit !important;
+            font-family: inherit !important;
+            font-weight: inherit !important;
+            line-height: inherit !important;
+        }
+
+        @media screen and (max-width: 600px) {
+            h1 {
+                font-size: 32px !important;
+                line-height: 32px !important;
+            }
+        }
+
+        div[style*="margin: 16px 0;"] {
+            margin: 0 !important;
+        }
+    </style>
+</head>
+<body style="background-color: #f4f4f4; margin: 0 !important; padding: 0 !important;">
+<table style="border: 0; width: 100%;">
+    <tr>
+        <td class="violet-dark-bg" style="background-color: #542f96; align-content: center;">
+            <table style="max-width: 600px;">
+                <tr>
+                    <td style="padding: 40px 10px 40px 10px;"></td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td align="center" class="violet-dark-bg" style="background-color: #542f96; padding: 0 10px 0 10px;">
+            <table style="max-width: 600px; border: 0; width: 100%;">
+                <tr>
+                    <td
+                            style="
+                                    background-color: #ffffff;
+                                    text-align: center;
+                                    vertical-align: top;
+                                    padding: 40px 20px 20px 20px;
+                                    border-radius: 4px 4px 0 0;
+                                    color: #111111;
+                                    font-family: 'Lato', Helvetica, Arial, sans-serif;
+                                    font-size: 48px;
+                                    font-weight: 400;
+                                    letter-spacing: 4px;
+                                    line-height: 48px;
+                                "
+                    >
+                        <h1 style="font-size: 48px; font-weight: 400; margin: 2px;">Kanwise</h1>
+                        <h1 style="font-size: 24px; font-weight: 200; margin: 2px;">New password 🔑</h1>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td align="center" style="align-content: center; background-color: #f4f4f4; padding: 0 10px 0 10px;">
+            <table style="width: 100%; max-width: 600px;">
+                <tr>
+                    <td align="left" bgcolor="#ffffff"
+                        style="padding: 20px 30px 40px 30px; color: #666666; font-family: 'Lato', Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 400; line-height: 25px;">
+                        <h3 style="color: #111111">Hello, <span th:text="${firstName}"></span>❗️</h3>
+                        <p style="margin: 0;">A new password has been generated automatically for you during the
+                            registration process. Please change this password after logging in.</p>
+                        <h3 style="color: #111111">New password: <span th:text="${password}"></span></h3>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="background-color: #ffffff; text-align: left">
+                        <table style="width: 100%">
+                            <tr>
+                                <td
+                                        style="
+                                                background-color: #ffffff;
+                                                text-align: left;
+                                                padding: 0 30px 20px 30px;
+                                                color: #666666;
+                                                font-family: 'Lato', Helvetica, Arial, sans-serif;
+                                                font-size: 18px;
+                                                font-weight: 400;
+                                                line-height: 25px;
+                                            "
+                                >
+                                    <p style="margin: 0;">If you have any questions, just reply to this email—we're
+                                        always happy to help out.</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td
+                                        style="
+                                                background-color: #ffffff;
+                                                text-align: left;
+                                                padding: 0 30px 40px 30px;
+                                                border-radius: 0 0 4px 4px;
+                                                color: #666666;
+                                                font-family: 'Lato', Helvetica, Arial, sans-serif;
+                                                font-size: 18px;
+                                                font-weight: 400;
+                                                line-height: 25px;
+                                            "
+                                >
+                                    <p style="margin: 0;">
+                                        Cheers, <br/>
+                                        Kanwise Team
+                                    </p>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet author="janwodniak (generated)" id="1662051509666-8">
+        <loadData encoding="UTF-8" file="data/user.csv" quotchar="&quot;" separator="," tableName="user">
+            <column header="id" name="id"/>
+            <column header="active" name="active"/>
+            <column header="email" name="email"/>
+            <column header="first_name" name="first_name"/>
+            <column header="is_account_non_expired" name="is_account_non_expired"/>
+            <column header="is_account_non_locked" name="is_account_non_locked"/>
+            <column header="is_credentials_non_expired" name="is_credentials_non_expired"/>
+            <column header="is_enabled" name="is_enabled"/>
+            <column header="join_date" name="join_date"/>
+            <column header="last_login_date" name="last_login_date"/>
+            <column header="last_name" name="last_name"/>
+            <column header="password" name="password"/>
+            <column header="phone_number" name="phone_number"/>
+            <column header="two_factor_enabled" name="two_factor_enabled"/>
+            <column header="user_role" name="user_role"/>
+            <column header="username" name="username"/>
+        </loadData>
+    </changeSet>
+</databaseChangeLog>
+

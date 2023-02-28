@@ -1,0 +1,1 @@
+SELECT setval('personal_report_job_log_id_seq', (SELECT MAX(id) FROM "personal_report_job_log"));

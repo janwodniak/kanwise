@@ -1,0 +1,73 @@
+#######################  EUREKA CONFIGURATION  #######################
+eureka:
+  client:
+    fetch-registry: 'true'
+    register-with-eureka: 'true'
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+
+#######################  SERVER CONFIGURATION  #######################
+server:
+  port: 8086
+
+#######################  SPRING CONFIGURATION  #######################
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  application:
+    name: notification-service
+  cloud:
+    discovery:
+      enabled: 'true'
+
+  #######################  KAFKA CONFIGURATION  #######################
+  kafka:
+    bootstrap-servers: localhost:29092
+    topic-names:
+      NOTIFICATION_EMAIL: notification-email
+      NOTIFICATION_SMS: notification-sms
+
+  #######################  MAIL CONFIGURATION  #######################
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: # TODO: Add your email here
+    password: # TODO: Add your password here
+
+    properties:
+      mail:
+        smtp:
+          ssl:
+            trust: "*"
+          auth: true
+          starttls:
+            enable: true
+          connectiontimeout: 5000
+          timeout: 3000
+          writetimeout: 5000
+
+#######################  TWILIO CONFIGURATION  #######################
+twilio:
+  account_sid: # TODO: Add your Twilio account SID here
+  auth_token: # TODO: Add your Twilio auth token here
+  number: # TODO: Add your Twilio number here
+
+
+kanwise:
+  #######################  DIRECTORY CONFIGURATION  #######################
+  directory:
+    email-templates: "notification-service/src/main/resources/templates"
+
+  #######################  TEMPLATES CONFIGURATION  #######################
+  email.template:
+    names:
+      ACCOUNT_CREATED: "account-created.html"
+      ACCOUNT_BLOCKED: "account-blocked.html"
+      PROJECT_JOIN_REQUEST_REJECTED: "project-join-request-rejected.html"
+      PROJECT_JOIN_REQUEST_ACCEPTED: "project-join-request-accepted.html"
+      NEW_TASK_ASSIGNED: "new-task-assigned.html"
+      PASSWORD_RESET: "password-reset.html"
+      PASSWORD_CHANGED: "password-changed.html"
+      USER_INFORMATION_CHANGED: "user-information-changed.html"
+      PERSONAL_REPORT: "personal-report.html"
+      PROJECT_REPORT: "project-report.html"

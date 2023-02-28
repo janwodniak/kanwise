@@ -1,0 +1,96 @@
+##########################  SERVER CONFIGURATION  #######################
+server:
+  port: 8080
+
+##########################  SPRING CONFIGURATION  #######################
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  application:
+    name: user-service
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+  zipkin:
+    base-url: http://localhost:9411
+
+  #######################  SPRING CLOUD CONFIGURATION  #######################
+  cloud:
+    discovery:
+      enabled: 'true'
+
+  #######################  DATASOURCE CONFIGURATION  #######################
+  datasource:
+    password: kanwise
+    url: jdbc:postgresql://localhost:5432/user
+    username: kanwise
+  jpa:
+    hibernate:
+      ddl-auto: 'create-drop'
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+    show-sql: true
+  liquibase:
+    enabled: false
+
+  #######################  KAFKA CONFIGURATION  #######################
+  kafka:
+    bootstrap-servers: localhost:29092
+    topic-names:
+      NOTIFICATION_EMAIL: notification-email
+      NOTIFICATION_SMS: notification-sms
+
+#######################  EUREKA CONFIGURATION  #######################
+eureka:
+  client:
+    fetch-registry: 'true'
+    register-with-eureka: 'true'
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+
+kanwise:
+  #######################  JWT CONFIGURATION  #######################
+  jwt:
+    secretKey: "Yq3t6w9z$C&F)J@McQfTjWnZr4u7x!A%D*G-KaPdRgUkXp2s5v8y/B?E(H+MbQeThVmYq3t6w9z$C&F)J@NcRfUjXnZr4u7x!A%D*G-KaPdSgVkYp3s5v8y/B?E(H+Mb"
+    tokenPrefix: "Bearer "
+    expirationAfter: "20d"
+    authorities: "kanwise"
+    issuer: "kanwise.com"
+    audience: "kanwise"
+
+  #######################  BFA CONFIGURATION  #######################
+  brute-force-attack:
+    maximum-number-of-attempts: 5
+    attempt-increment: 1
+    expire-after-write-time-unit: "MINUTES"
+    expire-after-write-unit: 15
+
+  #######################  TOKEN CONFIGURATION  #######################
+  token:
+    expiration: "24h"
+
+  #######################  SPACES CONFIGURATION  #######################
+  digitalocean:
+    spaces:
+      serviceEndpoint: # TODO: Add digitalocean spaces endpoint
+      names:
+        profile-images: kanwise
+      secretKey: # TODO: Add digitalocean secret key
+      signingRegion: # TODO: Add digitalocean
+      accessKey: # TODO: Add digitalocean access key
+
+    #######################  URL CONFIGURATION  #######################
+  url:
+    public-urls:
+      - '**'
+
+    #######################  OTP CONFIGURATION  #######################
+  otp:
+    expiration: "90s"
+    length: 6

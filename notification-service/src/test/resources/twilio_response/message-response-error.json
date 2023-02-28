@@ -1,0 +1,6 @@
+{
+  "status": 400,
+  "message": "An error occurred",
+  "code": 60000,
+  "more_info": "https:\/\/www.twilio.com\/docs\/errors\/60000"
+}

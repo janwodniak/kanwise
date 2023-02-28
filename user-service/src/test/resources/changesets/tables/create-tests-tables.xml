@@ -1,0 +1,151 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd">
+    <changeSet author="janwodniak (generated)" id="1667518279359-1">
+        <createTable tableName="one_time_password">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="one_time_password_pkey"/>
+            </column>
+            <column name="code" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="confirmed_at" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="created_at" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="expires_at" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="status" type="VARCHAR(255)"/>
+            <column name="user_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="janwodniak (generated)" id="1667518279359-2">
+        <createTable tableName="profile_image">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="profile_image_pkey"/>
+            </column>
+            <column name="image_name" type="VARCHAR(255)"/>
+            <column name="image_role" type="VARCHAR(255)"/>
+            <column name="image_url" type="VARCHAR(255)"/>
+            <column name="uploaded_at" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="upload_status" type="VARCHAR(255)"/>
+            <column name="user_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="janwodniak (generated)" id="1667518279359-3">
+        <createTable tableName="user">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="user_pkey"/>
+            </column>
+            <column name="active" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="email" type="VARCHAR(255)"/>
+            <column name="first_name" type="VARCHAR(255)"/>
+            <column name="is_account_non_expired" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="is_account_non_locked" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="is_credentials_non_expired" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="is_enabled" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="join_date" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="last_login_date" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="last_name" type="VARCHAR(255)"/>
+            <column name="password" type="VARCHAR(255)"/>
+            <column name="phone_number" type="VARCHAR(255)"/>
+            <column name="two_factor_enabled" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_role" type="VARCHAR(255)"/>
+            <column name="username" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="janwodniak (generated)" id="1667518279359-4">
+        <createTable tableName="password_reset_token">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="password_reset_token_pkey"/>
+            </column>
+            <column name="confirmed_at" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="created_at" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="expires_at" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="token" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="janwodniak (generated)" id="1667518279359-5">
+        <createTable tableName="user_notification_subscriptions">
+            <column name="user_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"
+                             primaryKeyName="user_notification_subscriptions_pkey"/>
+            </column>
+            <column name="notification_subscriptions" type="BOOLEAN"/>
+            <column name="notification_subscriptions_key" type="VARCHAR(255)">
+                <constraints nullable="false" primaryKey="true"
+                             primaryKeyName="user_notification_subscriptions_pkey"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="janwodniak (generated)" id="1667518279359-6">
+        <createTable tableName="user_two_factor_subscriptions">
+            <column name="user_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"
+                             primaryKeyName="user_two_factor_subscriptions_pkey"/>
+            </column>
+            <column name="two_factor_subscriptions" type="BOOLEAN"/>
+            <column name="two_factor_subscriptions_key" type="VARCHAR(255)">
+                <constraints nullable="false" primaryKey="true"
+                             primaryKeyName="user_two_factor_subscriptions_pkey"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="janwodniak (generated)" id="1667518279359-7">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="password_reset_token"
+                                 constraintName="fk5lwtbncug84d4ero33v3cfxvl" deferrable="false"
+                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+                                 referencedColumnNames="id" referencedTableName="user" validate="true"/>
+    </changeSet>
+    <changeSet author="janwodniak (generated)" id="1667518279359-8">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="profile_image"
+                                 constraintName="fk7c5ge678vgxydo2sepdmrj6ge" deferrable="false"
+                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+                                 referencedColumnNames="id" referencedTableName="user" validate="true"/>
+    </changeSet>
+    <changeSet author="janwodniak (generated)" id="1667518279359-9">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="user_two_factor_subscriptions"
+                                 constraintName="fkmdsbho283p2rdcmwhvwqqal46" deferrable="false"
+                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+                                 referencedColumnNames="id" referencedTableName="user" validate="true"/>
+    </changeSet>
+    <changeSet author="janwodniak (generated)" id="1667518279359-10">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="one_time_password"
+                                 constraintName="fkq1ndyyo893fod7ea13y3ak300" deferrable="false"
+                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+                                 referencedColumnNames="id" referencedTableName="user" validate="true"/>
+    </changeSet>
+    <changeSet author="janwodniak (generated)" id="1667518279359-11">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="user_notification_subscriptions"
+                                 constraintName="fksf7e6r6312t11p0c5os49hbxw" deferrable="false"
+                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+                                 referencedColumnNames="id" referencedTableName="user" validate="true"/>
+    </changeSet>
+</databaseChangeLog>

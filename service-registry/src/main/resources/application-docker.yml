@@ -1,0 +1,16 @@
+#######################  EUREKA CONFIGURATION  #######################
+eureka:
+  client:
+    healthcheck:
+      enabled: 'true'
+    fetch-registry: 'true'
+    register-with-eureka: 'true'
+#######################  SPRING CONFIGURATION  #######################
+spring:
+  application:
+    name: service-registry
+  zipkin:
+    base-url: http://zipkin:9411
+#######################  SERVER CONFIGURATION  #######################
+server:
+  port: '8761'

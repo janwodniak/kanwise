@@ -1,0 +1,191 @@
+version: '3.8'
+services:
+  postgres:
+    container_name: postgres
+    image: postgres:14-alpine
+    environment:
+      POSTGRES_USER: kanwise
+      POSTGRES_PASSWORD: kanwise
+      PGDATA: /data/postgres
+    volumes:
+      - postgres:/data/postgres
+      - ./script:/docker-entrypoint-initdb.d
+    ports:
+      - "5432:5432"
+    networks:
+      - postgres
+    restart: unless-stopped
+
+  pgadmin:
+    container_name: pgadmin
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-pgadmin4@pgadmin.org}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:-admin}
+      PGADMIN_CONFIG_SERVER_MODE: 'False'
+    volumes:
+      - pgadmin:/var/lib/pgadmin
+    ports:
+      - "5050:80"
+    networks:
+      - postgres
+    restart: unless-stopped
+
+  zipkin:
+    image: openzipkin/zipkin
+    container_name: zipkin
+    ports:
+      - "9411:9411"
+    networks:
+      - spring
+
+
+  zookeeper:
+    image: confluentinc/cp-zookeeper:latest
+    environment:
+      ZOOKEEPER_CLIENT_PORT: "2181"
+      ZOOKEEPER_TICK_TIME: 2000
+    ports:
+      - "2181:2181"
+    networks:
+      - spring
+
+  kafka:
+    image: confluentinc/cp-kafka:latest
+    depends_on:
+      - zookeeper
+    ports:
+      - "9092:9092"
+      - "29092:29092"
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092,PLAINTEXT_HOST://localhost:29092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+    networks:
+      - spring
+
+
+  service-registry:
+    image: janwodniak/service-registry:latest
+    container_name: service-registry
+    ports:
+      - "8761:8761"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    networks:
+      - spring
+    depends_on:
+      - zipkin
+
+  api-gateway:
+    image: janwodniak/api-gateway:latest
+    container_name: api-gateway
+    ports:
+      - "8083:8083"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    networks:
+      - spring
+    depends_on:
+      - service-registry
+      - zipkin
+
+  notification-service:
+    image: janwodniak/notification-service:latest
+    container_name: notification-service
+    ports:
+      - "8086:8086"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+      - TWILIO_ACCOUNT_SID= # TODO: Your Account SID from www.twilio.com
+      - TWILIO_AUTH_TOKEN= # TODO: Your Auth Token from www.twilio.com
+      - TWILIO_NUMBER= # TODO: Your Number from www.twilio.com
+      - MAIL_USERNAME= # TODO: Your email address
+      - MAIL_PASSWORD= # TODO: Your password for email (generated access token)
+    networks:
+      - spring
+    depends_on:
+      - service-registry
+      - kafka
+
+  user-service:
+    image: janwodniak/user-service:latest
+    container_name: user-service
+    ports:
+      - "8084:8084"
+    environment:
+      - DO_SPACES_ENDPOINT= # TODO: Your Digital Ocean Spaces endpoint, example: fra1.digitaloceanspaces.com
+      - DO_SPACES_BUCKET=kanwise
+      - DO_SPACES_SECRET_KEY= # TODO: Your Digital Ocean Spaces secret key
+      - DO_SPACES_REGION= # TODO: Your Digital Ocean Spaces region, example: fra1
+      - DO_SPACES_ACCESS_KEY= # TODO: Your Digital Ocean Spaces access key
+      - SPRING_PROFILES_ACTIVE=docker
+    networks:
+      - spring
+      - postgres
+    depends_on:
+      - service-registry
+      - postgres
+      - zipkin
+      - kafka
+
+  kanwise-service:
+    image: janwodniak/kanwise-service:latest
+    container_name: kanwise-service
+    ports:
+      - "8085:8085"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    networks:
+      - spring
+      - postgres
+    depends_on:
+      - service-registry
+      - postgres
+      - zipkin
+      - kafka
+
+  report-service:
+    image: janwodniak/report-service:latest
+    container_name: report-service
+    ports:
+      - "8087:8087"
+    environment:
+      - DO_SPACES_ENDPOINT= # TODO: Your Digital Ocean Spaces endpoint, example: fra1.digitaloceanspaces.com
+      - DO_SPACES_BUCKET=kanwise
+      - DO_SPACES_SECRET_KEY= # TODO: Your Digital Ocean Spaces secret key
+      - DO_SPACES_REGION= # TODO: Your Digital Ocean Spaces region, example: fra1
+      - DO_SPACES_ACCESS_KEY= # TODO: Your Digital Ocean Spaces access key
+      - SPRING_PROFILES_ACTIVE=docker
+    networks:
+      - spring
+      - postgres
+    depends_on:
+      - service-registry
+      - postgres
+      - zipkin
+      - kafka
+
+  kanwise-frontend:
+    image: janwodniak/kanwise-frontend
+    container_name: kanwise-frontend
+    ports:
+      - "4200:4200"
+    networks:
+      - spring
+    depends_on:
+      - api-gateway
+
+networks:
+  postgres:
+    driver: bridge
+  spring:
+    driver: bridge
+
+volumes:
+  postgres:
+  pgadmin:
+  script:

@@ -1,0 +1,16 @@
+INSERT INTO public.taskcomment (id, commented_at, content, author_id, task_id)
+VALUES (1, '2022-12-16 10:40:14.071222',
+        'Hey, I just wanted to check in about the database migration script we implemented using Liquibase. How did it go?',
+        1, 3),
+       (2, '2022-12-16 10:41:02.050954',
+        'It went great! The script worked perfectly and we were able to migrate the database to the new version without any issues.',
+        4, 3),
+       (3, '2022-12-16 10:41:47.887804',
+        'That''s great to hear! I''m glad we decided to use Liquibase for this task. It made it much easier to manage the database migration and handle any changes or updates we needed to make.',
+        1, 3),
+       (4, '2022-12-16 10:42:52.365444',
+        'Yeah, definitely. It''s a really useful tool and I''m glad we have it in our toolkit. Do you think we should use it for future database migrations as well?',
+        4, 3),
+       (5, '2022-12-16 10:43:31.476934',
+        'Definitely. I think it''s a reliable and efficient way to handle database migrations, and it saves us a lot of time and effort. Let''s make sure to use it for any future migrations we need to do.',
+        1, 3);

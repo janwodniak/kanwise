@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <include file="/data/insert-members-data.sql"/>
+    <include file="/data/insert-projects-data.sql"/>
+    <include file="/data/insert-memberships-data.sql"/>
+    <include file="/data/insert-member-notification-subscriptions-data.sql"/>
+    <include file="/data/insert-tasks-data.sql"/>
+    <include file="/data/insert-project-tasks-data.sql"/>
+    <include file="/data/insert-task-assigned-memberships-data.sql"/>
+    <include file="/data/insert-taskcomments-data.sql"/>
+    <include file="/data/insert-taskcommentreactions-data.sql"/>
+    <include file="/data/insert-taskstatuses-data.sql"/>
+    <include file="/data/insert-task-comments-data.sql"/>
+    <include file="/data/insert-task-statuses-data.sql"/>
+    <include file="/data/insert-join-requests-data.sql"/>
+    <include file="/data/insert-join-responses-data.sql"/>
+
+</databaseChangeLog>

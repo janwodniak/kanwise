@@ -1,0 +1,330 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd">
+    <changeSet author="janwodniak (generated)" id="1671480959598-1">
+        <createTable tableName="join_request">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="join_request_pkey"/>
+            </column>
+            <column name="message" type="VARCHAR(255)"/>
+            <column name="requested_at" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="join_response_id" type="BIGINT"/>
+            <column name="project_id" type="BIGINT"/>
+            <column name="requested_by_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="janwodniak (generated)" id="1671480959598-2">
+        <createTable tableName="join_response">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="join_response_pkey"/>
+            </column>
+            <column name="message" type="VARCHAR(255)"/>
+            <column name="responded_at" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="status" type="VARCHAR(255)"/>
+            <column name="join_request_id" type="BIGINT"/>
+            <column name="responded_by_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="janwodniak (generated)" id="1671480959598-3">
+        <createTable tableName="members">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="members_pkey"/>
+            </column>
+            <column name="active" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="username" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="janwodniak (generated)" id="1671480959598-4">
+        <createTable tableName="membership">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="membership_pkey"/>
+            </column>
+            <column name="active" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="status" type="INTEGER"/>
+            <column name="updated_at" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="member_id" type="BIGINT"/>
+            <column name="project_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="janwodniak (generated)" id="1671480959598-5">
+        <createTable tableName="project">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="project_pkey"/>
+            </column>
+            <column name="active" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="description" type="VARCHAR(255)"/>
+            <column name="status" type="VARCHAR(255)"/>
+            <column name="title" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="janwodniak (generated)" id="1671480959598-6">
+        <createTable tableName="task">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="task_pkey"/>
+            </column>
+            <column name="active" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="current_status" type="VARCHAR(255)"/>
+            <column name="description" type="VARCHAR(255)"/>
+            <column name="estimated_time" type="BIGINT"/>
+            <column name="priority" type="VARCHAR(255)"/>
+            <column name="title" type="VARCHAR(255)"/>
+            <column name="type" type="VARCHAR(255)"/>
+            <column name="author_id" type="BIGINT"/>
+            <column name="project_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="janwodniak (generated)" id="1671480959598-7">
+        <createTable tableName="taskcomment">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="taskcomment_pkey"/>
+            </column>
+            <column name="commented_at" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="content" type="VARCHAR(255)"/>
+            <column name="author_id" type="BIGINT"/>
+            <column name="task_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="janwodniak (generated)" id="1671480959598-8">
+        <createTable tableName="taskcommentreaction">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="taskcommentreaction_pkey"/>
+            </column>
+            <column name="reacted_at" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="reaction_label" type="VARCHAR(255)"/>
+            <column name="author_id" type="BIGINT"/>
+            <column name="comment_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="janwodniak (generated)" id="1671480959598-9">
+        <createTable tableName="taskstatus">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="taskstatus_pkey"/>
+            </column>
+            <column name="label" type="INTEGER"/>
+            <column name="set_at" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="set_till" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="set_by_id" type="BIGINT"/>
+            <column name="task_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="janwodniak (generated)" id="1671480959598-10">
+        <createTable tableName="task_statuses">
+            <column name="task_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="task_statuses_pkey"/>
+            </column>
+            <column name="statuses_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="task_statuses_pkey"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="janwodniak (generated)" id="1671480959598-11">
+        <createTable tableName="task_comments">
+            <column name="task_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="task_comments_pkey"/>
+            </column>
+            <column name="comments_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="task_comments_pkey"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="janwodniak (generated)" id="1671480959598-12">
+        <createTable tableName="project_tasks">
+            <column name="project_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="project_tasks_pkey"/>
+            </column>
+            <column name="tasks_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="project_tasks_pkey"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="janwodniak (generated)" id="1671480959598-13">
+        <addUniqueConstraint columnNames="statuses_id" constraintName="uk_1qienrkj8eo9ddqw5d63u3joh"
+                             tableName="task_statuses"/>
+    </changeSet>
+    <changeSet author="janwodniak (generated)" id="1671480959598-14">
+        <addUniqueConstraint columnNames="comments_id" constraintName="uk_2ai2rh4v34oftvibvlpfnc74b"
+                             tableName="task_comments"/>
+    </changeSet>
+    <changeSet author="janwodniak (generated)" id="1671480959598-15">
+        <addUniqueConstraint columnNames="tasks_id" constraintName="uk_7txclps991avka3ov7deot3ve"
+                             tableName="project_tasks"/>
+    </changeSet>
+    <changeSet author="janwodniak (generated)" id="1671480959598-16">
+        <createTable tableName="member_notification_subscriptions">
+            <column name="member_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"
+                             primaryKeyName="member_notification_subscriptions_pkey"/>
+            </column>
+            <column name="notification_subscriptions" type="BOOLEAN"/>
+            <column name="notification_subscriptions_key" type="VARCHAR(255)">
+                <constraints nullable="false" primaryKey="true"
+                             primaryKeyName="member_notification_subscriptions_pkey"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="janwodniak (generated)" id="1671480959598-17">
+        <createTable tableName="task_assigned_memberships">
+            <column name="assigned_tasks_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="task_assigned_memberships_pkey"/>
+            </column>
+            <column name="assigned_memberships_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="task_assigned_memberships_pkey"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="janwodniak (generated)" id="1671480959598-18">
+        <addForeignKeyConstraint baseColumnNames="project_id" baseTableName="membership"
+                                 constraintName="fk3577btyra3cyfm4fu459ph8un" deferrable="false"
+                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+                                 referencedColumnNames="id" referencedTableName="project" validate="true"/>
+    </changeSet>
+    <changeSet author="janwodniak (generated)" id="1671480959598-19">
+        <addForeignKeyConstraint baseColumnNames="assigned_tasks_id" baseTableName="task_assigned_memberships"
+                                 constraintName="fk4b4p4hkiwqlxo6s7yydrvd4i7" deferrable="false"
+                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+                                 referencedColumnNames="id" referencedTableName="task" validate="true"/>
+    </changeSet>
+    <changeSet author="janwodniak (generated)" id="1671480959598-20">
+        <addForeignKeyConstraint baseColumnNames="author_id" baseTableName="taskcomment"
+                                 constraintName="fk4mel5d7aj520hrmb76yjod5w0" deferrable="false"
+                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+                                 referencedColumnNames="id" referencedTableName="membership" validate="true"/>
+    </changeSet>
+    <changeSet author="janwodniak (generated)" id="1671480959598-21">
+        <addForeignKeyConstraint baseColumnNames="task_id" baseTableName="task_comments"
+                                 constraintName="fk57giy29i5nak139pefvyvhj9h" deferrable="false"
+                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+                                 referencedColumnNames="id" referencedTableName="task" validate="true"/>
+    </changeSet>
+    <changeSet author="janwodniak (generated)" id="1671480959598-22">
+        <addForeignKeyConstraint baseColumnNames="member_id" baseTableName="member_notification_subscriptions"
+                                 constraintName="fk6ipeqk9kh54idtfe8rux19vc6" deferrable="false"
+                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+                                 referencedColumnNames="id" referencedTableName="members" validate="true"/>
+    </changeSet>
+    <changeSet author="janwodniak (generated)" id="1671480959598-23">
+        <addForeignKeyConstraint baseColumnNames="statuses_id" baseTableName="task_statuses"
+                                 constraintName="fk6war2agqu4l5qp51jxqkt87tm" deferrable="false"
+                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+                                 referencedColumnNames="id" referencedTableName="taskstatus" validate="true"/>
+    </changeSet>
+    <changeSet author="janwodniak (generated)" id="1671480959598-24">
+        <addForeignKeyConstraint baseColumnNames="comments_id" baseTableName="task_comments"
+                                 constraintName="fk8i79naamd5r14rux0osghhauf" deferrable="false"
+                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+                                 referencedColumnNames="id" referencedTableName="taskcomment" validate="true"/>
+    </changeSet>
+    <changeSet author="janwodniak (generated)" id="1671480959598-25">
+        <addForeignKeyConstraint baseColumnNames="join_request_id" baseTableName="join_response"
+                                 constraintName="fk96xmhbjck6umt5hacfvvpgqjo" deferrable="false"
+                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+                                 referencedColumnNames="id" referencedTableName="join_request" validate="true"/>
+    </changeSet>
+    <changeSet author="janwodniak (generated)" id="1671480959598-26">
+        <addForeignKeyConstraint baseColumnNames="assigned_memberships_id" baseTableName="task_assigned_memberships"
+                                 constraintName="fkb6jvx0uuh8pkwkyxudhx3e0e2" deferrable="false"
+                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+                                 referencedColumnNames="id" referencedTableName="membership" validate="true"/>
+    </changeSet>
+    <changeSet author="janwodniak (generated)" id="1671480959598-27">
+        <addForeignKeyConstraint baseColumnNames="requested_by_id" baseTableName="join_request"
+                                 constraintName="fkfag9dk5yu4n2euc2acd8fk1o7" deferrable="false"
+                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+                                 referencedColumnNames="id" referencedTableName="members" validate="true"/>
+    </changeSet>
+    <changeSet author="janwodniak (generated)" id="1671480959598-28">
+        <addForeignKeyConstraint baseColumnNames="author_id" baseTableName="taskcommentreaction"
+                                 constraintName="fkfh826w2vb2v7tm72tnf56tsbb" deferrable="false"
+                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+                                 referencedColumnNames="id" referencedTableName="members" validate="true"/>
+    </changeSet>
+    <changeSet author="janwodniak (generated)" id="1671480959598-29">
+        <addForeignKeyConstraint baseColumnNames="member_id" baseTableName="membership"
+                                 constraintName="fkhhub48uqtxtje3tlexaw7yfy9" deferrable="false"
+                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+                                 referencedColumnNames="id" referencedTableName="members" validate="true"/>
+    </changeSet>
+    <changeSet author="janwodniak (generated)" id="1671480959598-30">
+        <addForeignKeyConstraint baseColumnNames="task_id" baseTableName="task_statuses"
+                                 constraintName="fkj3c5krmm91x52uhk839nigame" deferrable="false"
+                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+                                 referencedColumnNames="id" referencedTableName="task" validate="true"/>
+    </changeSet>
+    <changeSet author="janwodniak (generated)" id="1671480959598-31">
+        <addForeignKeyConstraint baseColumnNames="tasks_id" baseTableName="project_tasks"
+                                 constraintName="fkjpq8qlu1ftll8p93hdgm6i254" deferrable="false"
+                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+                                 referencedColumnNames="id" referencedTableName="task" validate="true"/>
+    </changeSet>
+    <changeSet author="janwodniak (generated)" id="1671480959598-32">
+        <addForeignKeyConstraint baseColumnNames="project_id" baseTableName="task"
+                                 constraintName="fkk8qrwowg31kx7hp93sru1pdqa" deferrable="false"
+                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+                                 referencedColumnNames="id" referencedTableName="project" validate="true"/>
+    </changeSet>
+    <changeSet author="janwodniak (generated)" id="1671480959598-33">
+        <addForeignKeyConstraint baseColumnNames="responded_by_id" baseTableName="join_response"
+                                 constraintName="fkmekiajdfab4e03n6t4qkcpb71" deferrable="false"
+                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+                                 referencedColumnNames="id" referencedTableName="members" validate="true"/>
+    </changeSet>
+    <changeSet author="janwodniak (generated)" id="1671480959598-34">
+        <addForeignKeyConstraint baseColumnNames="project_id" baseTableName="join_request"
+                                 constraintName="fkmoab9g6ibne733j7y7hv22i6f" deferrable="false"
+                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+                                 referencedColumnNames="id" referencedTableName="project" validate="true"/>
+    </changeSet>
+    <changeSet author="janwodniak (generated)" id="1671480959598-35">
+        <addForeignKeyConstraint baseColumnNames="task_id" baseTableName="taskstatus"
+                                 constraintName="fkogh0s3hwt2ox5m8ms0l945mow" deferrable="false"
+                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+                                 referencedColumnNames="id" referencedTableName="task" validate="true"/>
+    </changeSet>
+    <changeSet author="janwodniak (generated)" id="1671480959598-36">
+        <addForeignKeyConstraint baseColumnNames="comment_id" baseTableName="taskcommentreaction"
+                                 constraintName="fkognb5x8chxpcuqltlcls100v4" deferrable="false"
+                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+                                 referencedColumnNames="id" referencedTableName="taskcomment" validate="true"/>
+    </changeSet>
+    <changeSet author="janwodniak (generated)" id="1671480959598-37">
+        <addForeignKeyConstraint baseColumnNames="task_id" baseTableName="taskcomment"
+                                 constraintName="fkqf4ips3sat2dcrpled1kwjmip" deferrable="false"
+                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+                                 referencedColumnNames="id" referencedTableName="task" validate="true"/>
+    </changeSet>
+    <changeSet author="janwodniak (generated)" id="1671480959598-38">
+        <addForeignKeyConstraint baseColumnNames="set_by_id" baseTableName="taskstatus"
+                                 constraintName="fkr9dobxta63bm4s3xndhfyaw6a" deferrable="false"
+                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+                                 referencedColumnNames="id" referencedTableName="members" validate="true"/>
+    </changeSet>
+    <changeSet author="janwodniak (generated)" id="1671480959598-39">
+        <addForeignKeyConstraint baseColumnNames="join_response_id" baseTableName="join_request"
+                                 constraintName="fkrk0w8kju86x5gfffbyc3ekshx" deferrable="false"
+                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+                                 referencedColumnNames="id" referencedTableName="join_response" validate="true"/>
+    </changeSet>
+    <changeSet author="janwodniak (generated)" id="1671480959598-40">
+        <addForeignKeyConstraint baseColumnNames="project_id" baseTableName="project_tasks"
+                                 constraintName="fkrwqpj23ociawk68rbs6mooatw" deferrable="false"
+                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+                                 referencedColumnNames="id" referencedTableName="project" validate="true"/>
+    </changeSet>
+    <changeSet author="janwodniak (generated)" id="1671480959598-41">
+        <addForeignKeyConstraint baseColumnNames="author_id" baseTableName="task"
+                                 constraintName="fkt8tgy79l91ujmtaj65ppdoi6p" deferrable="false"
+                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+                                 referencedColumnNames="id" referencedTableName="membership" validate="true"/>
+    </changeSet>
+</databaseChangeLog>
